@@ -52,4 +52,8 @@ public class CompilingProcessor extends Processor {
     public void clear() {
 
     }
+
+    public VariableProcessor getVariableProcessor() {
+        return variableProcessor;
+    }
 }

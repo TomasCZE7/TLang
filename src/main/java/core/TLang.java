@@ -110,4 +110,8 @@ public class TLang {
     public TableComponent getVariableTable() {
         return variableTable;
     }
+
+    public CompilingProcessor getCompilingProcessor() {
+        return compilingProcessor;
+    }
 }

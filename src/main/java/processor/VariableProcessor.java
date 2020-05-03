@@ -4,6 +4,7 @@ import core.ApplicationMain;
 import core.variable.DataType;
 import core.variable.DataTypeSection;
 import core.variable.Variable;
+import math.LangMath;
 
 import java.util.HashMap;
 
@@ -20,43 +21,32 @@ public class VariableProcessor extends Processor {
     }
 
     private void processValue(String line, Variable var) {
-        line = line.trim();
+        line = replaceAllSpaces(line);
         if(var.getType().getTypeSection() == DataTypeSection.TEXT){
-            if(line.contains("\"")){
-                String[] plusSplit = line.split("\\+");
-                String[] allStrings = new String[plusSplit.length];
-                for(int i = 0; i < allStrings.length; i++){
-                    String l = plusSplit[i];
-                    String[] strings = l.split("\"");
-                    if(strings.length < 2 || strings.length > 3){
-                        if (!isNumber(strings[0]))
-                            throw new IllegalArgumentException("String is wrongly specified.");
-                        else {
-                            allStrings[i] = strings[0];
-                            continue;
-                        }
-                    }
-                    allStrings[i] = strings[1];
-                }
-                String output = "";
-                for(String s : allStrings)
-                    output += s;
-                var.setValue(output);
-            }
+            if(line.contains("\""))
+                var.setValue(getString(line));
         } else if(var.getType().getTypeSection() == DataTypeSection.NUMBER){
             long value = 0;
             for(String split : line.split("\\+")){
-                split = split.trim();
-                if(isNumber(split)){
+                split = replaceAllSpaces(split);
+                if(LangMath.isNumber(split)){
                     value += Long.parseLong(split);
                 }
             }
             var.setValue(value);
         }
+        if(!LangMath.isNumber(line) && getVariableFromString(line) != null){
+            Variable gotVar = getVariableFromString(line);
+            if(gotVar == null)
+                throw new IllegalArgumentException("Not found variable " +line);
+            if(var.getType() == DataType.AUTO){
+                var.setType(gotVar.getType());
+            }
+            var.setValue(gotVar.getValue());
+        }
     }
 
     private Variable processAction(String line) {
-        line = line.trim();
         if(line.contains(":")){
             String[] split = line.split(":");
             for(int i = 0; i < split.length; i++)
@@ -74,14 +64,21 @@ public class VariableProcessor extends Processor {
         return null;
     }
 
-    public HashMap<String, Variable> getVariables() {
-        return variables;
+    public Variable getVariable(String name) {
+        return variables.getOrDefault(name, null);
     }
 
     @Override
     public void clear() {
         variables.clear();
         ApplicationMain.tLang.getVariableTable().clear();
+    }
 
+    public boolean removeVariable(Variable var){
+        if(variables.containsValue(var)){
+            variables.remove(var.getName());
+            return true;
+        }
+        return false;
     }
 }

@@ -1,5 +1,9 @@
 package core.variable;
 
+import core.ApplicationMain;
+import math.LangMath;
+import processor.VariableProcessor;
+
 public class Variable {
 
     private DataType type;
@@ -9,7 +13,7 @@ public class Variable {
     public Variable(DataType type, String name, Object value) {
         this.type = type;
         this.name = name;
-        this.value = value;
+        setValue(value);
     }
 
     public Variable(DataType type, String name){
@@ -42,5 +46,13 @@ public class Variable {
 
     public void setValue(Object value) {
         this.value = value;
+        if(value == null)
+            return;
+        if(getType().getTypeSection() == DataTypeSection.NUMBER){
+            if(!LangMath.isNumber(value.toString())){
+                ApplicationMain.tLang.getCompilingProcessor().getVariableProcessor().removeVariable(this);
+                throw new NumberFormatException(getValue()+" cannot be converted to data type "+getType());
+            }
+        }
     }
 }

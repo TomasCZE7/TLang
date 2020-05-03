@@ -3,7 +3,8 @@ package core.variable;
 public enum DataType {
 
     NUMBER8(Byte.class, DataTypeSection.NUMBER), NUMBER16(Short.class, DataTypeSection.NUMBER),
-    NUMBER32(Integer.class, DataTypeSection.NUMBER), TEXT(String.class, DataTypeSection.TEXT);
+    NUMBER32(Integer.class, DataTypeSection.NUMBER), TEXT(String.class, DataTypeSection.TEXT),
+    AUTO(Object.class, DataTypeSection.OBJECT);
 
     private Class javaType;
     private DataTypeSection typeSection;
