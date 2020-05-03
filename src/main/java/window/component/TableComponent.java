@@ -31,4 +31,13 @@ public class TableComponent extends Component{
     public void clear() {
         defaultTableModel.setRowCount(0);
     }
+
+    public void updateRow(String name, Object value) {
+        for(int i = 0; i < defaultTableModel.getRowCount(); i++){
+            if(defaultTableModel.getValueAt(i, 0) == name){
+                defaultTableModel.setValueAt(value, i, 2);
+            }
+
+        }
+    }
 }

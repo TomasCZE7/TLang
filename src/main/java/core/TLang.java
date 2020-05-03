@@ -1,5 +1,6 @@
 package core;
 
+import math.LangMath;
 import math.Vector2;
 import math.Vector4;
 import processor.CompilingProcessor;

@@ -19,9 +19,9 @@ public class Variable {
     public Variable(DataType type, String name){
         this(type, name, null);
         if(type.getTypeSection() == DataTypeSection.TEXT)
-            this.value = "";
-         else if(type.getTypeSection() == DataTypeSection.NUMBER)
-            this.value = 0;
+            setValue("");
+        else if(type.getTypeSection() == DataTypeSection.NUMBER)
+             setValue(0);
     }
 
     public DataType getType() {

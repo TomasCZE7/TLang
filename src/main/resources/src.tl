@@ -1,3 +1,4 @@
 //This is a comment, the compiler will ignore this line.
 
-someText : TEXT = "some text here";
+n : NUMBER8 = 5;
+t : number8 = n+6;

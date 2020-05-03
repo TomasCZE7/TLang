@@ -20,7 +20,8 @@ public abstract class Processor {
             String[] stringSplit = split[i].split("\"");
             if (stringSplit.length < 2 || stringSplit.length > 3) {
                 if (!LangMath.isNumber(stringSplit[0])) {
-                    Variable variable = ApplicationMain.tLang.getCompilingProcessor().getVariableProcessor().getVariable(stringSplit[0]);
+                    Variable variable = ApplicationMain.tLang.getCompilingProcessor().getVariableProcessor().
+                            getVariableFromString(stringSplit[0]);
                     if (variable == null)
                         throw new IllegalArgumentException("String is wrongly specified.");
                     output += variable.getValue();
@@ -36,8 +37,7 @@ public abstract class Processor {
     }
 
     public Variable getVariableFromString(String name){
-        Variable variable = ApplicationMain.tLang.getCompilingProcessor().getVariableProcessor().getVariable(name);
-        return variable;
+        return ApplicationMain.tLang.getCompilingProcessor().getVariableProcessor().getVariable(name);
     }
 
     public String replaceAllSpaces(String line){
@@ -52,4 +52,21 @@ public abstract class Processor {
         }
         return output;
     }
+
+    public boolean isString(String s ){
+        return s.startsWith("\"") && s.startsWith("\"");
+    }
+    public boolean isValidString(String s){
+        return s.length() - s.replaceAll("\"","").length() == 2;
+    }
+
+    public static boolean arrayContains(String[] arr, String targetValue) {
+        for(String s: arr){
+            if(s.equals(targetValue))
+                return true;
+        }
+        return false;
+    }
+
+
 }
