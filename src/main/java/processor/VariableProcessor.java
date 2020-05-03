@@ -30,4 +30,9 @@ public class VariableProcessor extends Processor {
             ApplicationMain.tLang.getVariableTable().addRow(var.getName(), var.getType(), var.getValue());
         }
     }
+
+    @Override
+    public void clear() {
+        variables.clear();
+    }
 }
