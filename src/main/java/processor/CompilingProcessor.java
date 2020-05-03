@@ -1,5 +1,6 @@
-package core;
+package processor;
 
+import core.ApplicationMain;
 import core.variable.Variable;
 import processor.Processor;
 import processor.VariableProcessor;

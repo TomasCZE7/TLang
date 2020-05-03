@@ -2,6 +2,7 @@ package core;
 
 import math.Vector2;
 import math.Vector4;
+import processor.CompilingProcessor;
 import util.FileParser;
 import window.ConsoleWindow;
 import window.Window;
@@ -12,7 +13,6 @@ import window.WindowType;
 import window.component.TextComponent;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.PrintStream;

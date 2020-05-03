@@ -31,4 +31,16 @@ public class Variable {
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(DataType type) {
+        this.type = type;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
 }

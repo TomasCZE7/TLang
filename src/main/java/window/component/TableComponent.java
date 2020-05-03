@@ -29,7 +29,6 @@ public class TableComponent extends Component{
     }
 
     public void clear() {
-        for(int i = 0; i < defaultTableModel.getRowCount(); i++)
-            defaultTableModel.removeRow(i);
+        defaultTableModel.setRowCount(0);
     }
 }
